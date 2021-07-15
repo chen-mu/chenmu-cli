@@ -9,7 +9,6 @@ import './index.css'
 
 console.log('Routers===>', Routers)
 
-// const element =
 const Root = () => {
 	const pathname = location.pathname
 	const currRoute = Routers.filter((item) => item.path === location.pathname)
