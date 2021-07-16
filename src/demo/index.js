@@ -4,10 +4,14 @@ import Routers from './routes'
 import Demo from './page1/index'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import Store from './store/index.js'
 
 import './index.css'
 
-console.log('Routers===>', Routers)
+// console.log('Routers===>', Routers)
+
+const store = Store()
 
 const Root = () => {
 	const pathname = location.pathname
@@ -22,4 +26,8 @@ const Root = () => {
 		</div>
 	)
 }
-ReactDOM.render(Root(), document.getElementById('root'))
+ReactDOM.render(
+	<Provider store={store}>{Root()}</Provider>,
+
+	document.getElementById('root')
+)
