@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const webpack = require('webpack')
 
@@ -10,6 +11,7 @@ module.exports = merge(baseConfig, {
 
 	plugins: [
 		// new CleanWebpackPlugin(),
+		// new BundleAnalyzerPlugin(),
 		new webpack.HotModuleReplacementPlugin() //热更新插件
 	]
 })

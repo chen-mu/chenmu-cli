@@ -23,9 +23,7 @@ export default class Page1 extends React.Component {
 	render() {
 		// const demo = queryCode()
 		// console.log(this.state.numReducers)
-
 		const { add, numReducers } = this.props
-		console.log('12===>', this.props.numReducers)
 		return (
 			<div>
 				<span>{numReducers.num}</span>
