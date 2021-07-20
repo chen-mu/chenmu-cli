@@ -2,6 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FirendlyErrorePlugin = require('friendly-errors-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
 	// JS 执行入口文件
@@ -26,6 +28,16 @@ module.exports = {
 			filename: 'demo.html',
 			chunks: ['main'],
 			inject: 'body'
+		}),
+		new FirendlyErrorePlugin(),
+
+		new webpack.DllReferencePlugin({
+			// 注意: DllReferencePlugin 的 context 必须和 package.json 的同级目录，要不然会链接失败
+			context: path.resolve(__dirname, '../'),
+			manifest: path.resolve(__dirname, '../dll/react.manifest.json')
+		}),
+		new AddAssetHtmlPlugin({
+			filepath: path.resolve(__dirname, '../dll/_dll_react.js')
 		})
 	],
 
