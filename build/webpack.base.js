@@ -23,17 +23,9 @@ module.exports = {
 		chunkFilename: '[name]_[chunkhash:8]_chunk.js'
 	},
 
-	optimization: {
-		minimizer: [new UglifyJsPlugin()]
-	},
-
-	optimization: {
-		minimizer: [
-			new UglifyJsPlugin({
-				test: /\.js(\?.*)?$/i
-			})
-		]
-	},
+	// optimization: {
+	// 	minimizer: [new UglifyJsPlugin()]
+	// },
 
 	plugins: [
 		// new CleanWebpackPlugin(),
@@ -72,7 +64,7 @@ module.exports = {
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
 			filename: 'main.css' // 指定输出的css文件的文件名
-		})
+		}),
 		// new CompressionWebpackPlugin({
 		// 	filename: '[path].gz',
 		// 	algorithm: 'gzip',
@@ -82,6 +74,7 @@ module.exports = {
 		// 	minRatio: 0.8 // 只有压缩率小于这个值的资源才会被处理
 		// 	// deleteOriginalAssets: true // 删除原文件
 		// })
+		new UglifyJsPlugin({})
 	],
 
 	// 设置别名
