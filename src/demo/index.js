@@ -1,16 +1,11 @@
 import React, { Component, Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import Routers from './routes'
-import Demo from './page1/index'
-import { Router, Route, hashHistory, IndexRoute } from 'react-router'
+import { Route } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Store from './store/index.js'
-
 import './index.css'
-
-// console.log('Routers===>', Routers)
-
 const store = Store()
 
 const Root = () => {
@@ -26,8 +21,4 @@ const Root = () => {
 		</div>
 	)
 }
-ReactDOM.render(
-	<Provider store={store}>{Root()}</Provider>,
-
-	document.getElementById('root')
-)
+ReactDOM.render(<Provider store={store}>{Root()}</Provider>, document.getElementById('root'))

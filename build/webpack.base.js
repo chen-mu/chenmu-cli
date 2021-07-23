@@ -4,6 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FirendlyErrorePlugin = require('friendly-errors-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 module.exports = {
 	// JS 执行入口文件
@@ -20,6 +23,18 @@ module.exports = {
 		chunkFilename: '[name]_[chunkhash:8]_chunk.js'
 	},
 
+	optimization: {
+		minimizer: [new UglifyJsPlugin()]
+	},
+
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin({
+				test: /\.js(\?.*)?$/i
+			})
+		]
+	},
+
 	plugins: [
 		// new CleanWebpackPlugin(),
 		// new webpack.HotModuleReplacementPlugin(), //热更新插件
@@ -27,7 +42,21 @@ module.exports = {
 			template: './src/demo/index.html',
 			filename: 'demo.html',
 			chunks: ['main'],
-			inject: 'body'
+			inject: 'body',
+			minify: {
+				removeComments: true, // 是否删除注释
+				removeRedundantAttributes: true, // 是否删除多余（默认）属性
+				removeEmptyAttributes: true, // 是否删除空属性
+				collapseWhitespace: false, // 折叠空格
+				removeStyleLinkTypeAttributes: true, // 比如link中的type="text/css"
+				minifyCSS: true, // 是否压缩style标签内的css
+				minifyJS: {
+					// 压缩JS选项，可参考Terser配置
+					mangle: {
+						toplevel: true
+					}
+				}
+			}
 		}),
 		new FirendlyErrorePlugin(),
 
@@ -38,7 +67,21 @@ module.exports = {
 		}),
 		new AddAssetHtmlPlugin({
 			filepath: path.resolve(__dirname, '../dll/_dll_react.js')
+		}),
+		new MiniCssExtractPlugin({
+			// Options similar to the same options in webpackOptions.output
+			// both options are optional
+			filename: 'main.css' // 指定输出的css文件的文件名
 		})
+		// new CompressionWebpackPlugin({
+		// 	filename: '[path].gz',
+		// 	algorithm: 'gzip',
+		// 	// test: /\.js$|\.html$|\.json$|\.css/,
+		// 	test: /\.js$|\.json$|\.css/,
+		// 	threshold: 10240, // 只有大小大于该值的资源会被处理
+		// 	minRatio: 0.8 // 只有压缩率小于这个值的资源才会被处理
+		// 	// deleteOriginalAssets: true // 删除原文件
+		// })
 	],
 
 	// 设置别名
@@ -57,7 +100,7 @@ module.exports = {
 			{
 				test: /\.(le|c)ss$/,
 				exclude: /node_modules/,
-				use: ['style-loader', 'css-loader', 'less-loader']
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
 			}
 		]
 	}

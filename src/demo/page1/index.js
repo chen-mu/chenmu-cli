@@ -26,7 +26,7 @@ export default class Page1 extends React.Component {
 		const { add, numReducers } = this.props
 		return (
 			<div>
-				<span>{numReducers.num}</span>
+				<span className='demo'>{numReducers.num}11212</span>
 				<button onClick={add}>+</button>
 			</div>
 		)
