@@ -8,9 +8,10 @@
     "test": "cross-env NODE_ENV=production",
     "testlc": " node test.js",
     "demo": "webpack && node server.js",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "webpack --config build/webpack.dev.js && start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
+    "@storybook/addon-info": "^5.3.21",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "html-webpack-plugin": "4.5.2",
     "react": "^17.0.2",

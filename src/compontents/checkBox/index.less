@@ -1,0 +1,34 @@
+
+.storybook-checkbox {
+    position: relative; 
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    transition: all 0.4s ease;
+    &--normal {
+        transition: all 0.4s ease;
+        border: 1px solid #9D9D9D;
+        border-radius: 100%; 
+    }
+    &--active {
+        background: #ff2244;
+        border: 1px solid #ff2244;
+    }
+    &--disable {
+        background: #ccc;
+        border: 1px solid #9D9D9D;
+        border-radius: 100%;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        display: block; 
+        width: 8px;
+        height: 6px;
+        background: url('https://static.caibeike.com/i/3f05d9998aa88c24545b585be6658fb3-o5OVac-AiwAfhp1') no-repeat;
+        background-size: 100%;
+    }
+}
